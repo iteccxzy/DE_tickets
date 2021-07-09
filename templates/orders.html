@@ -1,0 +1,117 @@
+{% extends "base.html" %} {% block title %} Orders {% endblock %} 
+{%block content %} {% include "nav.html" %}
+
+<div class="container-fluid my-3">
+  <div class="overlay"></div>
+  <div class="row content justify-content-md-center">
+    <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded">
+      <h2>Orders</h2>
+      <!-- spinner -->
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>OFFICE</th>
+            <th>CUSTOMER</th>
+            <th>DATE</th>
+            <th>TIME</th>
+            <th>DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for o in Orders%}
+          <tr>
+            <td>{{o.office}}</td>
+            <td>{{o.customer}}</td>
+            <td>{{o.odate}}</td>
+            <td>{{o.otime}}</td>
+            <td>
+              <a
+                class="delete1 btn btn-danger btn-sm"
+                href="{%url 'delete_order' o.order_id %}"
+                data-order="{{o.order_id}}"
+                >DELETE </a
+              >
+            </td>
+
+           
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">Confirm delete tiket</div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      data-order="{{o.order_id}}"
+                      id="accept"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Delete 
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {%endfor%}
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- pagination -->
+      <div class="pagination">
+        <span class="step-links">
+          {% if Orders.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ Orders.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ Orders.number }} of {{ Orders.paginator.num_pages }}.
+          </span>
+
+          {% if Orders.has_next %}
+          <a href="?page={{ Orders.next_page_number }}">next</a>
+          <a href="?page={{ Orders.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{%for m in messages%}
+<p>{{m}}</p>
+{%endfor%} {%endblock %}

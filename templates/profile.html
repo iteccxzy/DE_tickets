@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block title %} Admin Page {% endblock %}
+{% load static%}
+{%block content %} 
+
+{% include "nav.html" %}
+<!-- content page -->
+<div class="container-fluid mt-3">
+  <div class="row content justify-content-center">
+    <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded">
+      <div class="card p-3"  style="width: 28rem; background-color: #e6e6e6;">
+        <img  src="{% static 'img/profile.png' %} "
+        class="card-img-top" alt="..."  style="height:150px; width: 150px;"/>
+        
+
+        <div class="card-body">
+          <h5 class="card-title">{{Bus.name |upper}}</h5>
+          <p class="card-text">Contact: {{Bus.tel}}</p>
+          <p class="card-text">Email: {{Bus.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%include 'footer.html'%}
+{%endblock %}

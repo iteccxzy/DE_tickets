@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %} Plans {% endblock %} {%block content%}
+
+<div class="container content ">
+  <div class="overlay"></div>
+    <div class="row justify-content-md-center">
+      <div class="col-6 shadow p-3 mb-5 bg-body rounded">
+        <div class="alert alert-info" role="alert">{{ofi.desc}}</div>
+        <h2>Customer</h2>
+        <form id="customer" action="" data-url1="{% url 'save_customer'%}">
+          {{formCustomer.as_p}}
+          <input type="submit" class="btn btn-outline-info btn-sm" value="add name" />
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div id="div-order" class="row justify-content-md-center" style="display: none">
+      <div class="col-6 shadow p-3 mb-5 bg-body rounded">
+        <h2>Order</h2>
+        <form
+          action=""
+          id="order"
+          data-url2="{%url 'get_date'%}"
+          data-url3="{%url 'get_time'%}"
+          data-url4="{%url 'add_customer_or'%}"
+          data-oo="{{ofi}}"
+          data-oid="{{ofi.ofi_id}}"
+        >
+          {{formOrder.as_p}}
+          <input id="inp" class="btn btn-outline-info btn-sm" type="submit" value="add order" />
+        </form>
+      </div>
+  </div>
+</div>
+{%endblock%}

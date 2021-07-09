@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %} set_plans {% endblock %}
+
+{%block content %}
+
+
+<div class="container">
+    <p><a href="{%url 'register'%}">register</a></p>
+    <form method="POST" action="">
+        {% csrf_token%}
+
+        <input type="text" name="username" placeholder="Usuario..." class="form-control">
+
+        <input type="password" name="password" placeholder="Contraseña..." class="form-control">
+
+
+        <input class="btn login_btn" type="submit" value="Ingresar">
+    </form>
+</div>
+
+{%if messages%}
+<div id="messages">
+    {%for message in messages%}
+    <p>{{message}}</p>
+    {%endfor%}
+</div>
+{%endif%}
+
+{%endblock %}

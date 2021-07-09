@@ -1,0 +1,1 @@
+web: gunicorn turnos.wsgi --log-file - --log-level debug

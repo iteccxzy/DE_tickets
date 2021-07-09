@@ -1,0 +1,8 @@
+<option value="select"></option>
+
+{% for s in st %}
+
+<option value="{{ s.st_id}}">{{ s.st_date | date:"d-m-Y"}}</option>
+
+{% endfor %}
+

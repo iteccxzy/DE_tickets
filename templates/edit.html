@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %} Edit Page {% endblock %} 
+{%block content %}
+{% include "nav.html" %}
+
+<div class="container-fluid mt-3">
+  <div class="row content justify-content-md-center">
+    <div class="col-sm-6">
+
+      <div class="card" style="width: 30rem; background-color: #f1f7fa;">
+        <div class="card-body">
+          <h5 class="card-title">Edit profile</h5>
+          
+          <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+    
+            <div class="mb-3">
+              <label for="bs" class="form-label">Business:</label>
+              <input
+                type="text"
+                name="bs"
+                class="form-control"
+                id="bs"
+                placeholder="{{Bus.name}}"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="te" class="form-label">Contact:</label>
+              <input
+                type="text"
+                name="te"
+                class="form-control"
+                id="te"
+                placeholder="{{Bus.tel}}"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="ma" class="form-label">Email:</label>
+              <input
+                type="text"
+                name="ma"
+                class="form-control"
+                id="ma"
+                placeholder="{{Bus.email}}"
+                required
+              />
+            </div>
+    
+            <div class="mb-3">
+              <label for="pic" class="form-label">Pic:</label>
+              <input type="file" class="form-control" id="pic" disabled/>
+            </div>
+    
+           <input class="btn btn-info btn-sm" type="submit" value="save">
+          </form>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+{%endblock %}

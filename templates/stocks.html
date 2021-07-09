@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block title %} Stocks {% endblock %} {%block content %} {% include "nav.html" %}
+
+<div class="container-fluid mt-3">
+  <div class="overlay"></div>
+  <div class="row content justify-content-md-center">
+    <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded">
+      <h2>Stocks</h2>
+
+      <!-- spinner -->
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>OFFICE</th>
+            <th>DATE</th>
+            <th>TIME</th>
+            <th>EXISTING</th>
+            <th>ADD</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for s in Stocks%}
+          <tr>
+            <td>{{s.office}}</td>
+            <td>{{s.st_date}}</td>
+            <td>{{s.st_time}}</td>
+            <td class="qt">{{s.qt}}</td>
+            <td>
+              <a
+                class="spin btn btn btn-info btn-sm"
+                href="{%url 'add_orders'%}?of={{s.office}}&date={{s.st_date|date:'Y-m-d'}}&time={{s.st_time|date:'G:i:s'}}"
+                >add order</a
+              >
+            </td>
+
+            {%endfor%}
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination m-2">
+        <span class="step-links">
+          {% if Stocks.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ Stocks.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ Stocks.number }} of {{ Stocks.paginator.num_pages }}.
+          </span>
+
+          {% if Stocks.has_next %}
+          <a href="?page={{ Stocks.next_page_number }}">next</a>
+          <a href="?page={{ Stocks.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
+  
+    </div>
+  </div>
+</div>
+{%for m in messages%}
+<p>{{m}}</p>
+{%endfor%} 
+{%endblock%}
